@@ -12,7 +12,7 @@ uninstall:
 
 dist:
 	git archive --format=tar --prefix=openrc-keyring-$(V)/ $(V) | gzip -9 > openrc-keyring-$(V).tar.gz
-	gpg --detach-sign --use-agent openrc-keyring-$(V).tar.gz
+	gpg -u $(KEY) --detach-sign --use-agent openrc-keyring-$(V).tar.gz
 
 #upload:
 #	scp openrc-keyring-$(V).tar.gz openrc-keyring-$(V).tar.gz.sig nymeria.archlinux.org:/srv/ftp/other/archlinux-keyring/

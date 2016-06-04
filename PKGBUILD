@@ -5,15 +5,15 @@ pkgver=20160504
 pkgrel=1
 pkgdesc='Arch Linux OpenRC PGP keyring'
 arch=('any')
-url='https://github.com/cromerc/openrc-keyring/'
+url='https://sourceforge.net/projects/archopenrc/files/arch-openrc'
 license=('GPL')
 install="${pkgname}.install"
-source=("${pkgname}-${pkgver}.tar.gz"
-        "${pkgname}-${pkgver}.tar.gz.sig")
-md5sums=('5300b4dce642b120a2c053ca969685e8'
+source=("${url}/${pkgname}-${pkgver}.tar.gz"
+        "${url}/${pkgname}-${pkgver}.tar.gz.sig")
+md5sums=('23d7ef603fe65d4b329a917c9f82309d'
          'SKIP')
 validpgpkeys=(
-              'A55C3F1BA61CAA63036D82BAFA91071797BEEEC2' # cromer
+              '4F4CF80BFFB69EB90F00150A5BD217F2BBAAAE9E' # cromer
              )
 
 package() {

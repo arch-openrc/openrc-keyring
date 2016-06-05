@@ -13,7 +13,7 @@ source=("${url}/${pkgname}-${pkgver}.tar.gz"
 md5sums=('21b10c8597b6ff1e07458a007e95a495'
          'SKIP')
 validpgpkeys=(
-              '4F4CF80BFFB69EB90F00150A5BD217F2BBAAAE9E' # cromer
+              'A55C3F1BA61CAA63036D82BAFA91071797BEEEC2' # cromer
              )
 
 package() {

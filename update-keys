@@ -31,7 +31,7 @@ while read -ra data; do
 	username="${data[@]:1}"
 	${GPG} --recv-keys ${keyid} &>/dev/null
 	printf 'minimize\nquit\ny\n' | \
-		${GPG} --command-fd 0 --edit-key ${keyid}
+	${GPG} --command-fd 0 --edit-key ${keyid}
 	${GPG} --yes --lsign-key ${keyid} &>/dev/null
 	${GPG} --armor --no-emit-version --export ${keyid} >> master/${username}.asc
 	echo "${keyid}:4:" >> openrc-trusted
@@ -46,15 +46,14 @@ while read -ra data; do
 	keyid="${data[0]}"
 	username="${data[@]:1}"
 	printf 'clean\nquit\ny\n' | \
-		${GPG} --command-fd 0 --edit-key ${keyid}
-	#if ! ${GPG} --list-keys --with-colons ${keyid} 2>/dev/null | grep -q '^pub:f:'; then
-	#	echo "key is not fully trusted: ${keyid} ${username}"
-	#else
+	${GPG} --command-fd 0 --edit-key ${keyid}
+	if ! ${GPG} --list-keys --with-colons ${keyid} 2>/dev/null | grep -q '^pub:f:'; then
+		echo "key is not fully trusted: ${keyid} ${username}"
+	else
 		${GPG} --armor --no-emit-version --export ${keyid} >> packager/${username}.asc
-	#fi
+	fi
 done < packager-keyids
 
-# No revoked keys yet, remove this after a key gets revoked
 touch openrc-revoked
 
 while read -ra data; do
@@ -62,7 +61,7 @@ while read -ra data; do
 	username="${data[1]}"
 	${GPG} --recv-keys ${keyid} &>/dev/null
 	printf 'clean\nquit\ny\n' | \
-		${GPG} --command-fd 0 --edit-key ${keyid}
+	${GPG} --command-fd 0 --edit-key ${keyid}
 	if ! ${GPG} --list-keys --with-colons ${keyid} 2>/dev/null | grep -q '^pub:f:'; then
 		${GPG} --armor --no-emit-version --export ${keyid} >> packager-revoked/${username}.asc
 		echo "${keyid}" >> openrc-revoked

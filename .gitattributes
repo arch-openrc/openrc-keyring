@@ -7,3 +7,4 @@ master		export-ignore
 packager	export-ignore
 PKGBUILD	export-ignore
 openrc-keyring.install	export-ignore
+README.md	export-ignore
